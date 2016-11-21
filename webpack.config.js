@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
- 
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     //插件项
     plugins: [
@@ -10,22 +10,25 @@ module.exports = {
 	    Zepto: 'n-zepto',
 	    'window.Zepto': 'n-zepto',
 	    'window.$': 'n-zepto',
-	  })
+	  }),
+	new ExtractTextPlugin("style.css")
     ],
     //页面入口文件配置
     entry: {
-        index : './app/index.js'
+        index : './app/index.js',
+        index1 : './app/index1.js'
     },
     //入口文件输出配置
     output: {
         path: 'dist/',
-        publicPath:'dist/',
+        publicPath:'',
         filename: 'build.js'
     },
     module: {
         //加载器配置
         loaders: [
-            { test: /\.css$/, loader: 'style-loader!css-loader' },
+            // { test: /\.css$/, loader: 'style-loader!css-loader' },
+            { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")},
             { test: /\.js$/, loader: 'jsx-loader?harmony' },
             { test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
             { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
@@ -45,5 +48,4 @@ module.exports = {
             AppAction : 'js/actions/AppAction.js'
         }
     }
-
 };
