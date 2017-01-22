@@ -6,5 +6,6 @@ var $ = require("n-zepto");
 
 alert("111")
 $(".main").click(function(){
-	alert("111")
+	alert("222")
 })
+
