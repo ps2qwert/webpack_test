@@ -28,7 +28,7 @@ module.exports = {
     ],
     //页面入口文件配置
     entry: [
-        __dirname + '/app/index1.js',
+        __dirname + '/src/app/index1.js',
         'webpack-dev-server/client?http://localhost:8080/'
     ],
     //入口文件输出配置
@@ -44,8 +44,12 @@ module.exports = {
             { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")},
             { test: /\.js$/, loader: 'jsx-loader?harmony' },
             { test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
-            { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'},
-            { test: /\.json$/, loader : "json"}
+            { 
+                test: /\.(png|jpg)$/, 
+                loader: 'url?limit=10000&name=images/[hash:8].[name].[ext]'
+            },
+            { test: /\.json$/, loader : "json"},
+
  //            {
 	//   test: require.resolve('webpack-zepto'),  // 此loader配置项的目标是NPM中的jquery
 	//   loader: 'expose?$!expose?Zepto', // 先把jQuery对象声明成为全局变量`jQuery`，再通过管道进一步又声明成为全局变量`$`

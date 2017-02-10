@@ -1,5 +1,9 @@
+require('../static/css/reset.css'); //加载初始化样式
+require('../static/css/style.css'); //加载组件样式
+
+
 $(".main").click(function(){
-	alert("221")
+	alert("213")
 })
 
 Function.prototype.bind = function(){
