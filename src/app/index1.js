@@ -16,8 +16,8 @@ Function.prototype.bind = function(){
         console.log(arguments);//[3,4]
         return self.apply(context,[].concat.call(args,[].slice.call(arguments)));
     };
-
 };
+
 var obj = {
     name:"keke"
 };

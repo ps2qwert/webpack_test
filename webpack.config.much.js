@@ -23,19 +23,27 @@ module.exports = {
                   minify:{
                         removeComments: true,
                         collapseWhitespace : true
-                  }
+                  },
+                  chunks : ['index','common.js']
+            }),
+            new HtmlWebpackPlugin({
+                filename: 'list.html',
+                template: 'index.html',
+                inject : true,
+                chunks: ['common.js', 'list']
             })
     ],
     //页面入口文件配置
-    entry: [
-        __dirname + '/src/app/index1.js',
-        'webpack-dev-server/client?http://localhost:8080/'
-    ],
+    entry: {
+        index : __dirname + '/src/app/index1.js',
+        list : __dirname + '/src/app/list.js' 
+    },
+    
     //入口文件输出配置
     output: {
         path: __dirname + '/dist',
         // publicPath : "/dist/",
-        filename: 'build.js'
+        filename: '[name].js'
     },
     module: {
         //加载器配置
@@ -49,11 +57,6 @@ module.exports = {
                 loader: 'url?limit=10000&name=images/[hash:8].[name].[ext]'
             },
             { test: /\.json$/, loader : "json"},
-
- //            {
-	//   test: require.resolve('webpack-zepto'),  // 此loader配置项的目标是NPM中的jquery
-	//   loader: 'expose?$!expose?Zepto', // 先把jQuery对象声明成为全局变量`jQuery`，再通过管道进一步又声明成为全局变量`$`
-	// }
         ]
     },
     //其它解决方案配置
